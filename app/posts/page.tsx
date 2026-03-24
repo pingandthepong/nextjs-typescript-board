@@ -1,8 +1,15 @@
-import { getPosts } from "@/lib/api/posts";
+import { getFilteredPosts } from "@/lib/api/posts";
 import PostsView from "./PostsView";
 
-export default async function Posts() {
-  const posts = await getPosts();
+export default async function Posts({
+  searchParams,
+}: {
+  searchParams: { keyword?: string; page?: string };
+}) {
+  const params = await searchParams;
+  const keyword = params.keyword || "";
 
-  return <PostsView data={posts} />;
+  const filteredPosts = await getFilteredPosts(keyword);
+
+  return <PostsView data={filteredPosts} />;
 }
