@@ -6,8 +6,7 @@ export function filterPosts(posts: Post[], keyword: string) {
   return posts.filter((post) => {
     return (
       String(post.userId).toLowerCase().includes(lowerKeyword) ||
-      post.title.toLowerCase().includes(lowerKeyword) ||
-      post.body.toLowerCase().includes(lowerKeyword)
+      post.title.toLowerCase().includes(lowerKeyword)
     );
   });
 }

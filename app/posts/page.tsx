@@ -4,7 +4,7 @@ import PostsView from "./PostsView";
 export default async function Posts({
   searchParams,
 }: {
-  searchParams: { keyword?: string; page?: string };
+  searchParams: Promise<{ keyword?: string; page?: string }>;
 }) {
   const params = await searchParams;
   const keyword = params.keyword || "";
