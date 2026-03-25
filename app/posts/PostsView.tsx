@@ -5,8 +5,19 @@ import PostList from "../components/PostList";
 import Search from "../components/SearchInput";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import Pagination from "../components/Pagination";
 
-export default function PostsView({ data }: { data: Post[] }) {
+export default function PostsView({
+  data,
+  totalCount,
+  currentPage,
+  totalPages,
+}: {
+  data: Post[];
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
+}) {
   return (
     <>
       <div className="space-y-8">
@@ -16,10 +27,11 @@ export default function PostsView({ data }: { data: Post[] }) {
               Posts
             </h1>
             <p className="text-base text-gray-600">
-              전체 게시글 ({data.length}개)
+              전체 게시글 ({totalCount}개)
             </p>
           </div>
 
+          {/* 글쓰기 */}
           <Link
             href="/create"
             className="flex items-center gap-2 shadow-sm bg-gray-900 text-white px-4 py-2.5 rounded-lg cursor-pointer hover:bg-gray-900/90">
@@ -30,12 +42,14 @@ export default function PostsView({ data }: { data: Post[] }) {
           </Link>
         </div>
 
-        {/* 글쓰기 */}
         {/* 검색 */}
         <Search />
 
         {/* 리스트 렌더링 */}
         <PostList data={data} />
+
+        {/* Pagination */}
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       </div>
     </>
   );

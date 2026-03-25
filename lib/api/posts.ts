@@ -1,13 +1,13 @@
-import { POSTS_API_URL } from "../constants";
 import { filterPosts } from "../utils/filterPosts";
 
+// ========================
+// fetch + 데이터 처리
+// ========================
+
 export async function getPosts() {
-  const res = await fetch(POSTS_API_URL);
-
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   if (!res.ok) throw new Error(`Error: ${res.status}`);
-
   const data = await res.json();
-
   return data;
 }
 

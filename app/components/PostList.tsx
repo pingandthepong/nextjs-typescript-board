@@ -5,7 +5,7 @@ import Tbody from "./Tbody";
 export default function PostList({ data }: { data: Post[] }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse ">
         <thead className="bg-gray-50 border-b border-gray-200">
           <tr>
             <Thead>id</Thead>

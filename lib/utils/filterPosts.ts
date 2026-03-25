@@ -1,5 +1,9 @@
 import { Post } from "@/types/posts";
 
+// ========================
+// 필터 로직
+// ========================
+
 export function filterPosts(posts: Post[], keyword: string) {
   const lowerKeyword = keyword.toLowerCase();
 
