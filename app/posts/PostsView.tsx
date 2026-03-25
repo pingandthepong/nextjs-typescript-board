@@ -32,7 +32,7 @@ export default function PostsView({
           </div>
 
           {/* 글쓰기 */}
-          <Button style="black" href="/create" icon={Plus}>
+          <Button variant="primary" href="/create" icon={Plus}>
             글쓰기
           </Button>
         </div>

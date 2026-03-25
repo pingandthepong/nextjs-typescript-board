@@ -2,20 +2,20 @@
 
 import { Post } from "@/types/posts";
 import Link from "next/link";
-import { ArrowLeft, User } from "lucide-react";
+import { ArrowLeft, User, SquarePen, Trash2 } from "lucide-react";
 import Button from "../../components/Button";
-import { SquarePen, Trash2 } from "lucide-react";
 
 export default function PostDetailView({ post }: Post) {
   return (
     <div className="max-w-4xl mx-auto">
       {/* 뒤로가기 */}
-      <Link
+      <Button
         href="/posts"
-        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 text-sm font-medium  transition-colors group">
-        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        <span>목록으로 돌아가기</span>
-      </Link>
+        variant="ghost"
+        icon={ArrowLeft}
+        className="shadow-none">
+        목록으로 돌아가기
+      </Button>
 
       <section className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 shadow-sm">
         {/* 상단 */}
@@ -37,12 +37,12 @@ export default function PostDetailView({ post }: Post) {
 
       <div className="flex items-center gap-3 mt-8">
         {/* 수정 */}
-        <Button style="basic" href="/edit" icon={SquarePen}>
+        <Button variant="outline" href="/edit" icon={SquarePen}>
           수정
         </Button>
 
         {/* 삭제 */}
-        <Button style="red" href="/delete" icon={Trash2}>
+        <Button variant="danger" href="/delete" icon={Trash2}>
           삭제
         </Button>
       </div>
