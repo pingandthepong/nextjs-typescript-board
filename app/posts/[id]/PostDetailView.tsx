@@ -1,7 +1,10 @@
 "use client";
 
+import { Post } from "@/types/posts";
 import Link from "next/link";
 import { ArrowLeft, User } from "lucide-react";
+import Button from "../../components/Button";
+import { SquarePen, Trash2 } from "lucide-react";
 
 export default function PostDetailView({ post }: Post) {
   return (
@@ -32,9 +35,17 @@ export default function PostDetailView({ post }: Post) {
         </div>
       </section>
 
-      {/* 수정 */}
+      <div className="flex items-center gap-3 mt-8">
+        {/* 수정 */}
+        <Button style="basic" href="/edit" icon={SquarePen}>
+          수정
+        </Button>
 
-      {/* 삭제 */}
+        {/* 삭제 */}
+        <Button style="red" href="/delete" icon={Trash2}>
+          삭제
+        </Button>
+      </div>
     </div>
   );
 }

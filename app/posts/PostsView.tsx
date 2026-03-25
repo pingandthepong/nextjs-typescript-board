@@ -3,9 +3,9 @@
 import { Post } from "@/types/posts";
 import PostList from "../components/PostList";
 import Search from "../components/SearchInput";
-import Link from "next/link";
-import { Plus } from "lucide-react";
 import Pagination from "../components/Pagination";
+import Button from "../components/Button";
+import { Plus } from "lucide-react";
 
 export default function PostsView({
   data,
@@ -32,14 +32,9 @@ export default function PostsView({
           </div>
 
           {/* 글쓰기 */}
-          <Link
-            href="/create"
-            className="flex items-center gap-2 shadow-sm bg-gray-900 text-white px-4 py-2.5 rounded-lg cursor-pointer hover:bg-gray-900/90">
-            <Plus className="w-4 h-4" />
-            <span className="text-sm font-semibold tracking-tight">
-              Write Post
-            </span>
-          </Link>
+          <Button style="black" href="/create" icon={Plus}>
+            글쓰기
+          </Button>
         </div>
 
         {/* 검색 */}
