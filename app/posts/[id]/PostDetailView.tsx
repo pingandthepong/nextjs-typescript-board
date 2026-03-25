@@ -12,9 +12,9 @@ export default function PostDetailView({ post }: Post) {
       {/* 뒤로가기 */}
       <Link
         href="/posts"
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 text-sm font-medium  transition-colors group">
+        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 text-sm font-medium  transition-colors group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        <span className="">목록으로 돌아가기</span>
+        <span>목록으로 돌아가기</span>
       </Link>
 
       <section className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 shadow-sm">
