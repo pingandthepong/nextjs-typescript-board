@@ -2,7 +2,7 @@
 
 import { Post } from "@/types/posts";
 import PostList from "../components/PostList";
-import Search from "../components/SearchInput";
+import PostSearch from "./components/PostSearch";
 import Pagination from "../components/Pagination";
 import Button from "../components/Button";
 import { Plus } from "lucide-react";
@@ -32,13 +32,13 @@ export default function PostsView({
           </div>
 
           {/* 글쓰기 */}
-          <Button variant="primary" href="/create" icon={Plus}>
+          <Button variant="primary" href="posts/new" icon={Plus}>
             글쓰기
           </Button>
         </div>
 
         {/* 검색 */}
-        <Search />
+        <PostSearch />
 
         {/* 리스트 렌더링 */}
         <PostList data={data} />

@@ -1,20 +1,14 @@
 "use client";
 
 import { Post } from "@/types/posts";
-import { ArrowLeft, User, SquarePen, Trash2 } from "lucide-react";
+import { User, SquarePen, Trash2 } from "lucide-react";
 import Button from "../../components/Button";
+import BackToListButton from "../components/BackToListButton";
 
 export default function PostDetailView({ post }: { post: Post }) {
   return (
     <div className="max-w-4xl mx-auto">
-      {/* 뒤로가기 */}
-      <Button
-        href="/posts"
-        variant="ghost"
-        icon={ArrowLeft}
-        className="shadow-none">
-        목록으로 돌아가기
-      </Button>
+      <BackToListButton />
 
       <section className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 shadow-sm">
         {/* 상단 */}
@@ -36,7 +30,10 @@ export default function PostDetailView({ post }: { post: Post }) {
 
       <div className="flex items-center gap-3 mt-8">
         {/* 수정 */}
-        <Button variant="outline" href="/edit" icon={SquarePen}>
+        <Button
+          variant="outline"
+          href={`posts/${post.id}/edit`}
+          icon={SquarePen}>
           수정
         </Button>
 

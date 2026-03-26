@@ -23,7 +23,7 @@ const variantStyles: Record<Variant, string> = {
   outline:
     "bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm",
   ghost:
-    "bg-none text-gray-600 hover:text-gray-900 mb-8 text-sm font-medium shadow-none group",
+    "bg-none text-gray-600 hover:text-gray-900 mb-6 text-sm font-medium shadow-none group",
   danger:
     "bg-white text-red-600 border border-red-200 hover:text-red-700 hover:bg-red-50 hover:border-red-300 shadow-sm",
 };
