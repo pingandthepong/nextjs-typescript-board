@@ -1,11 +1,10 @@
 "use client";
 
 import { Post } from "@/types/posts";
-import Link from "next/link";
 import { ArrowLeft, User, SquarePen, Trash2 } from "lucide-react";
 import Button from "../../components/Button";
 
-export default function PostDetailView({ post }: Post) {
+export default function PostDetailView({ post }: { post: Post }) {
   return (
     <div className="max-w-4xl mx-auto">
       {/* 뒤로가기 */}
