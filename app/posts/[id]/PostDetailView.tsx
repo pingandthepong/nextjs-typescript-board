@@ -7,39 +7,19 @@ import BackToListButton from "../components/BackToListButton";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import ConfirmDialog from "@/app/components/ui/ConfirmDialog";
 
 export default function PostDetailView({ post }: { post: Post }) {
   const [deleting, setDeleting] = useState(false);
   const router = useRouter();
 
-  const confirmDelete = () => {
-    toast((t) => (
-      <div className="font-semibold">
-        📌 이 게시물을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
-        <div className="flex justify-end gap-2 mt-2">
-          <Button variant="outline" onClick={() => toast.dismiss(t.id)}>
-            삭제 취소
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              toast.dismiss(t.id);
-              handleDelete();
-            }}>
-            삭제
-          </Button>
-        </div>
-      </div>
-    ));
-  };
-
-  const handleDelete = async () => {
+  const handleDelete = async (id: number) => {
     if (deleting) return;
     setDeleting(true);
 
     try {
       const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
         {
           method: "DELETE",
         },
@@ -47,8 +27,13 @@ export default function PostDetailView({ post }: { post: Post }) {
 
       if (!res.ok) throw new Error("삭제 실패");
 
-      toast.success("게시글이 삭제되었습니다.");
-      router.push("/posts");
+      toast.success("게시글이 삭제되었습니다.", {
+        duration: 2000,
+      });
+
+      setTimeout(() => {
+        router.push("/posts");
+      }, 2000);
     } catch (err) {
       toast.error("삭제에 실패했습니다.");
     } finally {
@@ -88,13 +73,15 @@ export default function PostDetailView({ post }: { post: Post }) {
         </Button>
 
         {/* 삭제 */}
-        <Button
-          variant="danger"
-          icon={Trash2}
-          onClick={confirmDelete}
-          disabled={deleting}>
-          삭제
-        </Button>
+        <ConfirmDialog
+          title="이 게시물을 삭제하시겠습니까?"
+          description="삭제하면 복구할 수 없습니다."
+          confirmText="삭제"
+          onConfirm={() => handleDelete(post.id)}>
+          <Button variant="danger" icon={Trash2} disabled={deleting}>
+            삭제
+          </Button>
+        </ConfirmDialog>
       </div>
 
       <Toaster position="top-center" reverseOrder={true} />
