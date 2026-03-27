@@ -4,8 +4,10 @@ import Link from "next/link";
 import clsx from "clsx";
 
 type Variant = "primary" | "outline" | "ghost" | "danger";
+type ButtonType = "submit" | "button" | "reset";
 
 interface ButtonProps {
+  type?: ButtonType;
   children: React.ReactNode;
   variant?: Variant;
   icon?: React.ComponentType<{ className?: string }>;
@@ -29,6 +31,7 @@ const variantStyles: Record<Variant, string> = {
 };
 
 export default function Button({
+  type,
   children,
   variant = "primary",
   icon: Icon,
@@ -64,7 +67,11 @@ export default function Button({
 
   // 일반 버튼
   return (
-    <button onClick={onClick} disabled={disabled} className={combinedClass}>
+    <button
+      type={type ?? "button"}
+      onClick={onClick}
+      disabled={disabled}
+      className={combinedClass}>
       {content}
     </button>
   );

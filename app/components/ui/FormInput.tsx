@@ -13,6 +13,10 @@ type BaseProps = {
   className?: string;
   showIcon?: boolean;
   defaultValue?: string;
+  required?: boolean;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 };
 
 type InputProps = BaseProps & {
@@ -36,6 +40,7 @@ export default function FormInput(props: FormInputProps) {
     className = "",
     showIcon = false,
     defaultValue,
+    required = false,
   } = props;
 
   const baseStyle =
@@ -54,6 +59,8 @@ export default function FormInput(props: FormInputProps) {
           placeholder={placeholder}
           defaultValue={defaultValue}
           className={`${baseStyle} p-4 resize-none  ${className} min-h-40`}
+          required={required}
+          onChange={props.onChange}
         />
       ) : (
         <input
@@ -64,6 +71,8 @@ export default function FormInput(props: FormInputProps) {
           defaultValue={defaultValue}
           className={`${baseStyle} h-11 ${showIcon ? "pl-11" : "pl-4"} ${className}`}
           autoFocus={autoFocus}
+          required={required}
+          onChange={props.onChange}
         />
       )}
     </div>
