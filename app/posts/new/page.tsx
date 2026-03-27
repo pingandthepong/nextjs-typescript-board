@@ -2,7 +2,7 @@
 
 import { Save, X } from "lucide-react";
 import FormInput from "@/app/components/ui/FormInput";
-import Button from "../../components/Button";
+import Button from "../../components/ui/Button";
 import BackToListButton from "../components/BackToListButton";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";

@@ -2,7 +2,7 @@
 
 import { Post } from "@/types/posts";
 import { User, SquarePen, Trash2 } from "lucide-react";
-import Button from "../../components/Button";
+import Button from "../../components/ui/Button";
 import BackToListButton from "../components/BackToListButton";
 
 export default function PostDetailView({ post }: { post: Post }) {
@@ -32,7 +32,7 @@ export default function PostDetailView({ post }: { post: Post }) {
         {/* 수정 */}
         <Button
           variant="outline"
-          href={`posts/${post.id}/edit`}
+          href={`/posts/${post.id}/edit`}
           icon={SquarePen}>
           수정
         </Button>

@@ -1,9 +1,14 @@
-// /posts/posts/1/edit
+import EditView from "./EditView";
+import { getPost } from "@/lib/api/posts";
 
-export default function EditPost() {
-  return (
-    <>
-      <h1>Edit Page!</h1>
-    </>
-  );
+export default async function EditPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const post = await getPost(id);
+
+  return <EditView post={post} />;
 }

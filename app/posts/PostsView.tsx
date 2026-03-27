@@ -3,8 +3,8 @@
 import { Post } from "@/types/posts";
 import PostList from "../components/PostList";
 import PostSearch from "./components/PostSearch";
-import Pagination from "../components/Pagination";
-import Button from "../components/Button";
+import Pagination from "../components/ui/Pagination";
+import Button from "../components/ui/Button";
 import { Plus } from "lucide-react";
 
 export default function PostsView({

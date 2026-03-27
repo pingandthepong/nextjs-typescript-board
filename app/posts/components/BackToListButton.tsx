@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import Button from "@/app/components/Button";
+import Button from "@/app/components/ui/Button";
 
 type Props = {
   href?: string;
