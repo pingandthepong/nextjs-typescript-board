@@ -83,6 +83,26 @@ export default function EditView({ post }) {
       setError(false);
     }
   };
+
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    toast((t) => (
+      <div className="font-semibold">
+        📌 변경 사항을 폐기하시겠습니까?
+        <div className="flex justify-center gap-2 mt-2">
+          <Button
+            variant="outline"
+            onClick={() => router.push(`/posts/${post.id}`)}>
+            나가기
+          </Button>
+          <Button variant="primary" onClick={() => toast.dismiss(t.id)}>
+            계속 작성
+          </Button>
+        </div>
+      </div>
+    ));
+  };
   return (
     <>
       <div className="max-w-4xl mx-auto relative">
@@ -157,7 +177,7 @@ export default function EditView({ post }) {
                   disabled={loading}>
                   {loading ? "저장 중..." : "저장"}
                 </Button>
-                <Button variant="outline" href="/posts" icon={X}>
+                <Button variant="outline" onClick={handleCancel} icon={X}>
                   취소
                 </Button>
               </div>
