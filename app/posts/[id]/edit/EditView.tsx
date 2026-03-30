@@ -176,6 +176,7 @@ export default function EditView({ post }: { post: Post }) {
           </div>
         </section>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
