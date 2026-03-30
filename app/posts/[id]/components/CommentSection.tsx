@@ -15,6 +15,24 @@ export default function CommentSection({ postId }: { postId: number }) {
   };
 
   const handleDeleteComment = (id: number, password: string) => {
+    const isValid = handleVerifyPassword(id, password);
+    if (!isValid) return false;
+
+    setComments((prev) => prev.filter((c) => c.id !== id));
+    toast.success("댓글이 삭제되었습니다.");
+
+    return true;
+  };
+
+  const handleUpdateComment = (id: number, content: string) => {
+    setComments((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, content } : c)),
+    );
+
+    toast.success("댓글이 수정되었습니다.");
+  };
+
+  const handleVerifyPassword = (id: number, password: string) => {
     const target = comments.find((c) => c.id === id);
 
     if (!target) return false;
@@ -23,10 +41,6 @@ export default function CommentSection({ postId }: { postId: number }) {
       toast.error("비밀번호가 올바르지 않습니다.");
       return false;
     }
-
-    setComments((prev) => prev.filter((c) => c.id !== id));
-
-    toast.success("댓글이 삭제되었습니다.");
 
     return true;
   };
@@ -45,7 +59,12 @@ export default function CommentSection({ postId }: { postId: number }) {
             </span>
           </span>
         </h3>
-        <CommentList comments={comments} onDelete={handleDeleteComment} />
+        <CommentList
+          comments={comments}
+          onDelete={handleDeleteComment}
+          onUpdate={handleUpdateComment}
+          onVerify={handleVerifyPassword}
+        />
       </div>
       <CommentForm postId={postId} onAdd={handleAddComment} />
     </>

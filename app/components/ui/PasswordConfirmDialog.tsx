@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Trash2Icon } from "lucide-react";
+import { Trash2Icon, UserRound } from "lucide-react";
 
 import {
   AlertDialog,
@@ -26,16 +26,22 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function DeleteDialog({
-  title = "정말 삭제할까요?",
+export default function PasswordConfirmDialog({
+  title = `정말 삭제할까요?`,
   description = "작성 시 입력한 비밀번호를 입력하세요.",
-  confirmText = "확인",
+  confirmText = "삭제",
   cancelText = "취소",
   onConfirm,
   children,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
+
+  const destructiveStyle =
+    "bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive";
+
+  const editStyle =
+    "bg-blue-50 text-blue-600 dark:bg-blue-100 dark:text-blue-600";
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -46,14 +52,15 @@ export default function DeleteDialog({
       </AlertDialogTrigger>
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
-          <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
-            <Trash2Icon />
+          <AlertDialogMedia
+            className={confirmText === "삭제" ? destructiveStyle : editStyle}>
+            {confirmText === "삭제" ? <Trash2Icon /> : <UserRound />}
           </AlertDialogMedia>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription className="w-full">
             {description}
 
-            <span className="mt-6 text-left">
+            <span className="block mt-4 text-left">
               <CommentFormItem
                 as="input"
                 type="password"
@@ -78,9 +85,11 @@ export default function DeleteDialog({
               if (success) {
                 setPassword("");
                 setOpen(false);
+              } else {
+                setPassword("");
               }
             }}
-            variant="destructive">
+            variant={confirmText === "삭제" ? "destructive" : "default"}>
             {confirmText}
           </AlertDialogAction>
         </AlertDialogFooter>

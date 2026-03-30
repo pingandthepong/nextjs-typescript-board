@@ -1,16 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { Comment } from "@/types/comment";
 import { MessageSquare, UserRound, SquarePen, Trash2 } from "lucide-react";
-import DeleteDialog from "@/app/components/ui/DeleteDialog";
+import PasswordConfirmDialog from "@/app/components/ui/PasswordConfirmDialog";
+import CommentEditDialog from "./CommentEditDialog";
 
 export default function CommentList({
   comments,
   onDelete,
+  onVerify,
+  onUpdate,
 }: {
   comments: Comment[];
   onDelete: (id: number, password: string) => boolean;
+  onVerify: (id: number, password: string) => boolean;
+  onUpdate: (id: number, content: string) => void;
 }) {
+  const [editingComment, setEditingComment] = useState<Comment | null>(null);
+
   if (comments.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center p-12 border border-gray-200 rounded-2xl">
@@ -39,10 +47,24 @@ export default function CommentList({
                 {new Date(comment.createdAt).toLocaleDateString()}
               </span>
               <div className="flex gap-1">
-                <span className="w-10 h-7 flex justify-center items-center hover:bg-blue-50 rounded-sm text-transparent group-hover:text-gray-500 hover:text-blue-600 transition-colors">
-                  <SquarePen className="w-4 h-4" />
-                </span>
-                <DeleteDialog
+                <PasswordConfirmDialog
+                  title="댓글을 수정할까요?"
+                  confirmText="수정"
+                  cancelText="취소"
+                  onConfirm={(password) => {
+                    const success = onVerify(comment.id, password);
+
+                    if (success) {
+                      setEditingComment(comment); // 수정 Dialog 열기
+                    }
+
+                    return success;
+                  }}>
+                  <span className="w-10 h-7 flex justify-center items-center hover:bg-blue-50 rounded-sm text-transparent group-hover:text-gray-500 hover:text-blue-600 transition-colors">
+                    <SquarePen className="w-4 h-4" />
+                  </span>
+                </PasswordConfirmDialog>
+                <PasswordConfirmDialog
                   title="댓글을 삭제할까요?"
                   confirmText="삭제"
                   cancelText="취소"
@@ -52,7 +74,7 @@ export default function CommentList({
                   <span className="w-10 h-7 flex justify-center items-center hover:bg-red-50 rounded-sm text-transparent group-hover:text-gray-500 hover:text-red-600 transition-colors">
                     <Trash2 className="w-4 h-4" />
                   </span>
-                </DeleteDialog>
+                </PasswordConfirmDialog>
               </div>
             </div>
           </div>
@@ -61,6 +83,19 @@ export default function CommentList({
           </div>
         </div>
       ))}
+
+      {editingComment && (
+        <CommentEditDialog
+          open={!!editingComment}
+          nickname={editingComment.nickname}
+          initialContent={editingComment.content}
+          onClose={() => setEditingComment(null)}
+          onSave={(newContent) => {
+            onUpdate(editingComment.id, newContent);
+            setEditingComment(null);
+          }}
+        />
+      )}
     </div>
   );
 }
