@@ -1,6 +1,5 @@
 "use client";
 
-import { Post } from "@/types/posts";
 import { Save, X } from "lucide-react";
 import FormInput from "@/app/components/ui/FormInput";
 import Button from "@/app/components/ui/Button";
@@ -9,8 +8,9 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import ConfirmDialog from "@/app/components/ui/ConfirmDialog";
+import { Post } from "@/types/posts";
 
-export default function EditView({ post }) {
+export default function EditView({ post }: { post: Post }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [titleError, setTitleError] = useState("");
