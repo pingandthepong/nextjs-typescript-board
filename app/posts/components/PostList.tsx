@@ -1,6 +1,6 @@
 import { Post } from "@/types/posts";
-import Thead from "./Thead";
-import Tbody from "./Tbody";
+import Thead from "../../components/Thead";
+import Tbody from "../../components/Tbody";
 
 export default function PostList({ data }: { data: Post[] }) {
   return (

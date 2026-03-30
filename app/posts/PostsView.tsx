@@ -1,7 +1,7 @@
 "use client";
 
 import { Post } from "@/types/posts";
-import PostList from "../components/PostList";
+import PostList from "./components/PostList";
 import PostSearch from "./components/PostSearch";
 import Pagination from "../components/ui/Pagination";
 import Button from "../components/ui/Button";

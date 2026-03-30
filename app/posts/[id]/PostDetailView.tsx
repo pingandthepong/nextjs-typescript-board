@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ConfirmDialog from "@/app/components/ui/ConfirmDialog";
+import CommentSection from "./components/CommentSection";
 
 export default function PostDetailView({ post }: { post: Post }) {
   const [deleting, setDeleting] = useState(false);
@@ -35,7 +36,7 @@ export default function PostDetailView({ post }: { post: Post }) {
         router.push("/posts");
       }, 2000);
     } catch (err) {
-      toast.error("삭제에 실패했습니다.");
+      toast.error(`삭제에 실패했습니다. \nError: ${err}`);
     } finally {
       setDeleting(false);
     }
@@ -44,7 +45,6 @@ export default function PostDetailView({ post }: { post: Post }) {
   return (
     <div className="max-w-4xl mx-auto">
       <BackToListButton />
-
       <section className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 shadow-sm">
         {/* 상단 */}
         <div className="space-y-6 px-8 py-10">
@@ -62,7 +62,6 @@ export default function PostDetailView({ post }: { post: Post }) {
           {post.body}
         </div>
       </section>
-
       <div className="flex items-center gap-3 mt-8">
         {/* 수정 */}
         <Button
@@ -83,8 +82,10 @@ export default function PostDetailView({ post }: { post: Post }) {
           </Button>
         </ConfirmDialog>
       </div>
-
       <Toaster position="top-center" reverseOrder={true} />
+
+      {/* 댓글 */}
+      <CommentSection postId={post.id} />
     </div>
   );
 }
